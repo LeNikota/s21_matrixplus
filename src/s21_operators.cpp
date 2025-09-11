@@ -6,8 +6,9 @@ S21Matrix S21Matrix::operator+(const S21Matrix& other) {
   return result;
 }
 
-double& S21Matrix::operator()(int row, int col) const{
+double& S21Matrix::operator()(int row, int col) const {
+  if (row >= rows_ || col >= cols_)
     throw "Incorrect input, index is out of range";
 
-    return matrix_[row][col];
+  return matrix_[row][col];
 }

@@ -57,7 +57,7 @@ dkms.conf
 
 # Misc
 .vscode
-test
+test_runner
 coverage*
 *.gcno
 *.gcda

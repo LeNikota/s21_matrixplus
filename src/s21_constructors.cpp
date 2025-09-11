@@ -20,22 +20,3 @@ S21Matrix::S21Matrix(S21Matrix&& other) noexcept
 }
 
 S21Matrix::~S21Matrix() { DeallocateMatrix(); }
-
-// Utility
-void S21Matrix::AllocateMatrix() {
-  matrix_ = new double*[rows_];
-  for (size_t i = 0; i < rows_; i++) {
-    matrix_[i] = new double[cols_]();
-  }
-}
-
-void S21Matrix::DeallocateMatrix() {
-  if (!matrix_) return;
-
-  for (size_t i = 0; i < rows_; i++) delete[] matrix_[i];
-  delete[] matrix_;
-
-  matrix_ = nullptr;
-  rows_ = 0;
-  cols_ = 0;
-}

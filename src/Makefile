@@ -1,6 +1,6 @@
-CC = g++
+CXX = g++
 FLAGS = -Wall -Wextra -Werror -std=c++20 #-fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=unreachable
-SRC = $(wildcard *.c)
+SRC = $(wildcard *.cpp)
 OBJ = $(SRC:.cpp=.o)
 ifeq ($(MAKECMDGOALS), gcov_report)
     TEST_FLAGS = -fprofile-arcs -ftest-coverage
@@ -10,30 +10,27 @@ endif
 
 all: format s21_matrix_opp.a
 
-main: $(OBJ)
-	$(CC) $(FLAGS) $(SRC) -o a.out
-
 s21_matrix_opp.a: $(OBJ)
 	@ar rcs $@ $^
 
 %.o: %.c
-	@gcc $(FLAGS) $(TEST_FLAGS) -c $^ -o $@
+	@$(CXX) $(FLAGS) $(TEST_FLAGS) -c $^ -o $@
 
 clean:
-	@rm -rf $(OBJ) *.gcno *.gcda coverage* s21_matrix_opp.a a.out test 
+	@rm -rf $(OBJ) *.gcno *.gcda coverage* s21_matrix_opp.a test_runner 
 
 format:
-	@find $(git rev-parse --show-toplevel) \( -name "*.c" -o -name "*.h" \) | xargs clang-format -i
+	@find $(git rev-parse --show-toplevel) \( -name "*.c" -o -name "*.cpp" -o -name "*.h" \) | xargs clang-format -i
 
 static_check:
-	@find $(git rev-parse --show-toplevel) \( -name "*.c" -o -name "*.h" \) | xargs cppcheck --enable=all --suppress=missingIncludeSystem
+	@find $(git rev-parse --show-toplevel) \( -name "*.c" -o -name "*.cpp" -o -name "*.h" \) | xargs cppcheck --enable=all --suppress=missingIncludeSystem
 
 test: all
-	@gcc $(FLAGS) -o test ./tests/*.c -L. -l:s21_matrix_opp.a -lcheck -lm -lsubunit -lgcov
-	@./test
+	@$(CXX) $(FLAGS) -o test_runner ./tests/*.cpp -L. -l:s21_matrix_opp.a  -lgtest -lgtest_main -pthread -lgcov
+	@./test_runner
 
 leak: all
-	@gcc $(FLAGS) -o test ./tests/*.c -L. -l:s21_matrix_opp.a -lcheck -lm -lsubunit -lgcov
+	@$(CXX) $(FLAGS) -o test ./tests/*.c -L. -l:s21_matrix_opp.a  -lgtest -lgtest_main -pthread
 	valgrind --tool=memcheck --leak-check=yes --leak-check=full --show-leak-kinds=all ./test
 
 gcov_report: clean test
