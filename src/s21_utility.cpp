@@ -4,7 +4,7 @@ void S21Matrix::AllocateMatrix() {
   if (matrix_ != nullptr) throw "DeallocateMatrix before AllocateMatrix";
 
   matrix_ = new double*[rows_];
-  for (size_t i = 0; i < rows_; i++) {
+  for (int i = 0; i < rows_; i++) {
     matrix_[i] = new double[cols_]();
   }
 }
@@ -17,8 +17,8 @@ void S21Matrix::ReallocateMatrix(int rows, int cols) {
   int rows_limit = rows > rows_ ? rows_ : rows;
   int cols_limit = cols > cols_ ? cols_ : cols;
 
-  for (size_t i = 0; i < rows_limit; i++) {
-    for (size_t j = 0; j < cols_limit; j++) {
+  for (int i = 0; i < rows_limit; i++) {
+    for (int j = 0; j < cols_limit; j++) {
       temp.matrix_[i][j] = matrix_[i][j];
     }
   }
@@ -33,7 +33,7 @@ void S21Matrix::ReallocateMatrix(int rows, int cols) {
 void S21Matrix::DeallocateMatrix() {
   if (matrix_ == nullptr) return;
 
-  for (size_t i = 0; i < rows_; i++) delete[] matrix_[i];
+  for (int i = 0; i < rows_; i++) delete[] matrix_[i];
   delete[] matrix_;
 
   matrix_ = nullptr;

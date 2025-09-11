@@ -13,7 +13,7 @@ all: format s21_matrix_opp.a
 s21_matrix_opp.a: $(OBJ)
 	@ar rcs $@ $^
 
-%.o: %.c
+%.o: %.cpp
 	@$(CXX) $(FLAGS) $(TEST_FLAGS) -c $^ -o $@
 
 clean:
