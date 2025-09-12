@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cmath>
 #include <cstring>
 #include <iomanip>  // For std::setw
 #include <iostream>
@@ -39,9 +40,27 @@ class S21Matrix {
   int GetCols() const;
   void SetCols(int cols);
 
+  bool EqMatrix(const S21Matrix& other);
   void SumMatrix(const S21Matrix& other);
+  void SubMatrix(const S21Matrix& other);
+  void MulNumber(const double num);
+  void MulMatrix(const S21Matrix& other);
+  S21Matrix Transpose();
+  S21Matrix CalcComplements();
+  double Determinant();
+  S21Matrix InverseMatrix();
 
   S21Matrix operator+(const S21Matrix& other);
+  S21Matrix operator-(const S21Matrix& other);
+  S21Matrix operator*(const S21Matrix& other);
+  S21Matrix operator*(const double number);
+  bool operator==(const S21Matrix& other);
+  // TODO: is below correctly implemented?
+  S21Matrix operator=(const S21Matrix& other);
+  S21Matrix operator+=(const S21Matrix& other);
+  S21Matrix operator-=(const S21Matrix& other);
+  S21Matrix operator*=(const S21Matrix& other);
+  S21Matrix operator*=(const double number);
   double& operator()(int i, int j) const;
 
   // Utility
