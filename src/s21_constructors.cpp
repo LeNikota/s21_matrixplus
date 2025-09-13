@@ -1,6 +1,6 @@
 #include "s21_matrix_oop.h"
 
-S21Matrix::S21Matrix() : rows_(3), cols_(3) { AllocateMatrix(); }
+S21Matrix::S21Matrix() { AllocateMatrix(); }
 
 S21Matrix::S21Matrix(int rows, int cols) : rows_(rows), cols_(cols) {
   AllocateMatrix();
