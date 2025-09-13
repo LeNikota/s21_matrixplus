@@ -5,8 +5,6 @@
 #include <iomanip>  // For std::setw
 #include <iostream>
 
-// TODO: If the matrix increases in size, it is filled with zeros.
-// TODO: If it  decreases in size, the excess is simply discarded;
 // TODO: Delete print if not used
 
 // TODO: Is it fine for me to define directly in class values no in constructor?
@@ -52,15 +50,14 @@ class S21Matrix {
 
   S21Matrix operator+(const S21Matrix& other);
   S21Matrix operator-(const S21Matrix& other);
-  S21Matrix operator*(const S21Matrix& other);
   S21Matrix operator*(const double number);
+  S21Matrix operator*(const S21Matrix& other);
   bool operator==(const S21Matrix& other);
-  // TODO: is below correctly implemented?
-  S21Matrix operator=(const S21Matrix& other);
-  S21Matrix operator+=(const S21Matrix& other);
-  S21Matrix operator-=(const S21Matrix& other);
-  S21Matrix operator*=(const S21Matrix& other);
-  S21Matrix operator*=(const double number);
+  void operator=(const S21Matrix& other);
+  S21Matrix& operator+=(const S21Matrix& other);
+  S21Matrix& operator-=(const S21Matrix& other);
+  S21Matrix& operator*=(const double number);
+  S21Matrix& operator*=(const S21Matrix& other);
   double& operator()(int i, int j) const;
 
   // Utility
