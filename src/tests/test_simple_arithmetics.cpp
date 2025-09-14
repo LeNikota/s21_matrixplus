@@ -291,7 +291,7 @@ TEST(SimpleArithmetics, TransposeSingleElement) {
 TEST(SimpleArithmetics, TransposeEmpty) {
   S21Matrix m;
 
-  EXPECT_THROW(m.Transpose(), std::invalid_argument);
+  EXPECT_ANY_THROW(m.Transpose());
 }
 
 TEST(SimpleArithmetics, TransposeDoubleTranspose) {

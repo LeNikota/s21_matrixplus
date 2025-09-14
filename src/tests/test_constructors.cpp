@@ -199,7 +199,7 @@ TEST(Constructor, ChainedOperations) {
 // ----- Edge case tests -----
 //
 
-TEST(ConstructorTests, LargeMatrix) {
+TEST(Constructor, LargeMatrix) {
   // Test with large matrix (stress test)
   const int size = 1000;
   S21Matrix large(size, size);
@@ -220,7 +220,7 @@ TEST(ConstructorTests, LargeMatrix) {
   EXPECT_DOUBLE_EQ(copy(999, 999), 1998.0);
 }
 
-TEST(ConstructorTests, MoveThenUse) {
+TEST(Constructor, MoveThenUse) {
   // Test that moved-from object can still be used safely
   S21Matrix original(2, 2);
   original(0, 0) = 42.0;

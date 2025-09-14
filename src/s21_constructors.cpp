@@ -3,6 +3,8 @@
 S21Matrix::S21Matrix() { AllocateMatrix(); }
 
 S21Matrix::S21Matrix(int rows, int cols) : rows_(rows), cols_(cols) {
+  if (rows <= 0 || cols <= 0) throw "Incorrect rows or columns size!";
+
   AllocateMatrix();
 }
 

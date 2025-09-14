@@ -150,9 +150,6 @@ TEST(GetMinor, 2x2Matrix) {
   EXPECT_EQ(minor.GetRows(), 1);
   EXPECT_EQ(minor.GetCols(), 1);
   EXPECT_DOUBLE_EQ(minor(0, 0), 4.0);
-  EXPECT_DOUBLE_EQ(minor(0, 1), 3.0);
-  EXPECT_DOUBLE_EQ(minor(1, 0), 2.0);
-  EXPECT_DOUBLE_EQ(minor(1, 1), 1.0);
 }
 
 TEST(GetMinor, OutOfBoundsAccess) {

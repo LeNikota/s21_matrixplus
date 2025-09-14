@@ -54,18 +54,17 @@ void S21Matrix::MulMatrix(const S21Matrix &other) {
   if (cols_ != other.rows_)
     throw "The number of columns of the first matrix is not equal to the number of rows of the second matrix.";
 
-  S21Matrix result(rows_, cols_);
+  S21Matrix result(rows_, other.cols_);
 
   for (int i = 0; i < rows_; i++) {
     for (int j = 0; j < other.cols_; j++) {
       for (int k = 0; k < cols_; k++) {
-        result.matrix_[i][j] += matrix_[i][k] * other.matrix_[k][j];
+        result(i, j) += (*this)(i, k) * other(k, j);
       }
     }
   }
 
-  matrix_ = result.matrix_;
-  result.matrix_ = nullptr;  // Prevent double free
+  *this = std::move(result);
 }
 
 S21Matrix S21Matrix::Transpose() const {
