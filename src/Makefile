@@ -30,8 +30,8 @@ test: all
 	@./test_runner
 
 leak: all
-	@$(CXX) $(FLAGS) -o test ./tests/*.c -L. -l:s21_matrix_opp.a  -lgtest -lgtest_main -pthread
-	valgrind --tool=memcheck --leak-check=yes --leak-check=full --show-leak-kinds=all ./test
+	@$(CXX) $(FLAGS) -o test_runner ./tests/*.cpp -L. -l:s21_matrix_opp.a  -lgtest -lgtest_main -pthread
+	valgrind --tool=memcheck --leak-check=yes --leak-check=full --show-leak-kinds=all ./test_runner
 
 gcov_report: clean test
 	@lcov --capture --directory . --output-file coverage.info

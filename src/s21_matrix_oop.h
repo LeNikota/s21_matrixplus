@@ -43,7 +43,7 @@ class S21Matrix {
   S21Matrix operator*(const double number);
   S21Matrix operator*(const S21Matrix& other);
   bool operator==(const S21Matrix& other);
-  void operator=(const S21Matrix& other);
+  S21Matrix& operator=(const S21Matrix& other);
   S21Matrix& operator+=(const S21Matrix& other);
   S21Matrix& operator-=(const S21Matrix& other);
   S21Matrix& operator*=(const double number);

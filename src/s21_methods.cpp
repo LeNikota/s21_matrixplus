@@ -86,7 +86,11 @@ double S21Matrix::Determinant() {
 
   S21Matrix temp(rows_, cols_);
 
-  memcpy(temp.matrix_, matrix_, rows_ * cols_ * sizeof(double));
+  for (int i = 0; i < rows_; ++i) {
+    for (int j = 0; j < cols_; ++j) {
+      temp.matrix_[i][j] = matrix_[i][j];
+    }
+  }
 
   for (int col = 0; col < n; col++) {
     // Partial pivoting:
