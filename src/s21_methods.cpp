@@ -134,12 +134,17 @@ double S21Matrix::Determinant() {
 
 S21Matrix S21Matrix::CalcComplements() {
   if (rows_ != cols_) throw "The matrix is not square.";
+  if (rows_ == 1 && cols_ == 1) {
+    S21Matrix result(1, 1);
+    result(0, 0) = 1;
+    return result;
+  }
 
   S21Matrix result(rows_, cols_);
 
   for (int i = 0; i < rows_; i++) {
     for (int j = 0; j < cols_; j++) {
-      S21Matrix minor = result.GetMinor(i, j);
+      S21Matrix minor = this->GetMinor(i, j);
       double det = minor.Determinant();
 
       result.matrix_[i][j] = det * ((i + j) % 2 ? -1 : 1);
