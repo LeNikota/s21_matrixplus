@@ -5,7 +5,7 @@
 #include "../s21_matrix_oop.h"
 
 // EqMatrix Tests
-TEST(MatrixOperations, EqMatrixSame) {
+TEST(SimpleArithmetics, EqMatrixSame) {
   S21Matrix m1(2, 2);
   S21Matrix m2(2, 2);
   m1(0, 0) = 1.0;
@@ -21,7 +21,7 @@ TEST(MatrixOperations, EqMatrixSame) {
   EXPECT_TRUE(m2.EqMatrix(m1));
 }
 
-TEST(MatrixOperations, EqMatrixDifferentValues) {
+TEST(SimpleArithmetics, EqMatrixDifferentValues) {
   S21Matrix m1(2, 2);
   S21Matrix m2(2, 2);
   m1(0, 0) = 1.0;
@@ -37,7 +37,7 @@ TEST(MatrixOperations, EqMatrixDifferentValues) {
   EXPECT_FALSE(m2.EqMatrix(m1));
 }
 
-TEST(MatrixOperations, EqMatrixDifferentDimensions) {
+TEST(SimpleArithmetics, EqMatrixDifferentDimensions) {
   S21Matrix m1(2, 2);
   S21Matrix m2(2, 3);
   S21Matrix m3(3, 2);
@@ -47,7 +47,7 @@ TEST(MatrixOperations, EqMatrixDifferentDimensions) {
   EXPECT_FALSE(m2.EqMatrix(m3));
 }
 
-TEST(MatrixOperations, EqMatrixEmpty) {
+TEST(SimpleArithmetics, EqMatrixEmpty) {
   S21Matrix m1;
   S21Matrix m2;
 
@@ -55,7 +55,7 @@ TEST(MatrixOperations, EqMatrixEmpty) {
   EXPECT_TRUE(m2.EqMatrix(m1));
 }
 
-TEST(MatrixOperations, EqMatrixPrecision) {
+TEST(SimpleArithmetics, EqMatrixPrecision) {
   S21Matrix m1(1, 1);
   S21Matrix m2(1, 1);
   m1(0, 0) = 1.0000001;
@@ -69,7 +69,7 @@ TEST(MatrixOperations, EqMatrixPrecision) {
 }
 
 // SumMatrix Tests
-TEST(MatrixOperations, SumMatrixValid) {
+TEST(SimpleArithmetics, SumMatrixValid) {
   S21Matrix m1(2, 2);
   S21Matrix m2(2, 2);
   m1(0, 0) = 1.0;
@@ -93,7 +93,7 @@ TEST(MatrixOperations, SumMatrixValid) {
   EXPECT_DOUBLE_EQ(m2(0, 1), 6.0);
 }
 
-TEST(MatrixOperations, SumMatrixInvalidDimensions) {
+TEST(SimpleArithmetics, SumMatrixInvalidDimensions) {
   S21Matrix m1(2, 2);
   S21Matrix m2(2, 3);
   S21Matrix m3(3, 2);
@@ -102,7 +102,7 @@ TEST(MatrixOperations, SumMatrixInvalidDimensions) {
   EXPECT_ANY_THROW(m1.SumMatrix(m3));
 }
 
-TEST(MatrixOperations, SumMatrixWithZero) {
+TEST(SimpleArithmetics, SumMatrixWithZero) {
   S21Matrix m1(2, 2);
   S21Matrix m2(2, 2);  // All zeros by default
   m1(0, 0) = 1.0;
@@ -119,7 +119,7 @@ TEST(MatrixOperations, SumMatrixWithZero) {
 }
 
 // SubMatrix Tests
-TEST(MatrixOperations, SubMatrixValid) {
+TEST(SimpleArithmetics, SubMatrixValid) {
   S21Matrix m1(2, 2);
   S21Matrix m2(2, 2);
   m1(0, 0) = 10.0;
@@ -139,7 +139,7 @@ TEST(MatrixOperations, SubMatrixValid) {
   EXPECT_DOUBLE_EQ(m1(1, 1), 36.0);
 }
 
-TEST(MatrixOperations, SubMatrixInvalidDimensions) {
+TEST(SimpleArithmetics, SubMatrixInvalidDimensions) {
   S21Matrix m1(2, 2);
   S21Matrix m2(2, 3);
 
@@ -147,7 +147,7 @@ TEST(MatrixOperations, SubMatrixInvalidDimensions) {
 }
 
 // MulNumber Tests
-TEST(MatrixOperations, MulNumberPositive) {
+TEST(SimpleArithmetics, MulNumberPositive) {
   S21Matrix m(2, 2);
   m(0, 0) = 1.0;
   m(0, 1) = 2.0;
@@ -162,7 +162,7 @@ TEST(MatrixOperations, MulNumberPositive) {
   EXPECT_DOUBLE_EQ(m(1, 1), 10.0);
 }
 
-TEST(MatrixOperations, MulNumberNegative) {
+TEST(SimpleArithmetics, MulNumberNegative) {
   S21Matrix m(2, 2);
   m(0, 0) = 1.0;
   m(0, 1) = 2.0;
@@ -177,7 +177,7 @@ TEST(MatrixOperations, MulNumberNegative) {
   EXPECT_DOUBLE_EQ(m(1, 1), -8.0);
 }
 
-TEST(MatrixOperations, MulNumberZero) {
+TEST(SimpleArithmetics, MulNumberZero) {
   S21Matrix m(2, 2);
   m(0, 0) = 1.0;
   m(0, 1) = 2.0;
@@ -193,7 +193,7 @@ TEST(MatrixOperations, MulNumberZero) {
 }
 
 // MulMatrix Tests
-TEST(MatrixOperations, MulMatrixValid) {
+TEST(SimpleArithmetics, MulMatrixValid) {
   S21Matrix m1(2, 3);
   S21Matrix m2(3, 2);
 
@@ -231,7 +231,7 @@ TEST(MatrixOperations, MulMatrixValid) {
   EXPECT_DOUBLE_EQ(m2(0, 1), 8.0);
 }
 
-TEST(MatrixOperations, MulMatrixInvalidDimensions) {
+TEST(SimpleArithmetics, MulMatrixInvalidDimensions) {
   S21Matrix m1(2, 3);
   S21Matrix m2(2, 3);  // Incompatible dimensions
 
@@ -239,7 +239,7 @@ TEST(MatrixOperations, MulMatrixInvalidDimensions) {
 }
 
 // Transpose Tests
-TEST(MatrixOperations, TransposeSquare) {
+TEST(SimpleArithmetics, TransposeSquare) {
   S21Matrix m(2, 2);
   m(0, 0) = 1.0;
   m(0, 1) = 2.0;
@@ -256,7 +256,7 @@ TEST(MatrixOperations, TransposeSquare) {
   EXPECT_DOUBLE_EQ(result(1, 1), 4.0);
 }
 
-TEST(MatrixOperations, TransposeRectangular) {
+TEST(SimpleArithmetics, TransposeRectangular) {
   S21Matrix m(2, 3);
   m(0, 0) = 1.0;
   m(0, 1) = 2.0;
@@ -277,162 +277,34 @@ TEST(MatrixOperations, TransposeRectangular) {
   EXPECT_DOUBLE_EQ(result(2, 1), 6.0);
 }
 
-// Determinant Tests
-TEST(MatrixOperations, Determinant1x1) {
+TEST(SimpleArithmetics, TransposeSingleElement) {
   S21Matrix m(1, 1);
-  m(0, 0) = 5.0;
+  m(0, 0) = 42.0;
 
-  EXPECT_DOUBLE_EQ(m.Determinant(), 5.0);
+  S21Matrix result = m.Transpose();
+
+  EXPECT_EQ(result.GetRows(), 1);
+  EXPECT_EQ(result.GetCols(), 1);
+  EXPECT_DOUBLE_EQ(result(0, 0), 42.0);
 }
 
-TEST(MatrixOperations, Determinant2x2) {
-  S21Matrix m(2, 2);
-  m(0, 0) = 1.0;
-  m(0, 1) = 2.0;
-  m(1, 0) = 3.0;
-  m(1, 1) = 4.0;
+TEST(SimpleArithmetics, TransposeEmpty) {
+  S21Matrix m;
 
-  EXPECT_DOUBLE_EQ(m.Determinant(), -2.0);  // 1*4 - 2*3 = -2
+  EXPECT_THROW(m.Transpose(), std::invalid_argument);
 }
 
-TEST(MatrixOperations, Determinant3x3) {
-  S21Matrix m(3, 3);
+TEST(SimpleArithmetics, TransposeDoubleTranspose) {
+  S21Matrix m(2, 3);
   m(0, 0) = 1.0;
   m(0, 1) = 2.0;
   m(0, 2) = 3.0;
   m(1, 0) = 4.0;
   m(1, 1) = 5.0;
   m(1, 2) = 6.0;
-  m(2, 0) = 7.0;
-  m(2, 1) = 8.0;
-  m(2, 2) = 9.0;
 
-  // det = 1*(5*9 - 6*8) - 2*(4*9 - 6*7) + 3*(4*8 - 5*7)
-  //     = 1*(45-48) - 2*(36-42) + 3*(32-35)
-  //     = 1*(-3) - 2*(-6) + 3*(-3)
-  //     = -3 + 12 - 9 = 0
-  EXPECT_DOUBLE_EQ(m.Determinant(), 0.0);
-}
+  S21Matrix transposed = m.Transpose();
+  S21Matrix doubleTransposed = transposed.Transpose();
 
-TEST(MatrixOperations, DeterminantNonSquare) {
-  S21Matrix m(2, 3);
-
-  EXPECT_ANY_THROW(m.Determinant());
-}
-
-// CalcComplements Tests
-TEST(MatrixOperations, CalcComplements2x2) {
-  S21Matrix m(2, 2);
-  m(0, 0) = 1.0;
-  m(0, 1) = 2.0;
-  m(1, 0) = 3.0;
-  m(1, 1) = 4.0;
-
-  S21Matrix result = m.CalcComplements();
-
-  EXPECT_EQ(result.GetRows(), 2);
-  EXPECT_EQ(result.GetCols(), 2);
-  EXPECT_DOUBLE_EQ(result(0, 0), 4.0);
-  EXPECT_DOUBLE_EQ(result(0, 1), -3.0);
-  EXPECT_DOUBLE_EQ(result(1, 0), -2.0);
-  EXPECT_DOUBLE_EQ(result(1, 1), 1.0);
-}
-
-TEST(MatrixOperations, CalcComplementsNonSquare) {
-  S21Matrix m(2, 3);
-
-  EXPECT_ANY_THROW(m.CalcComplements());
-}
-
-// InverseMatrix Tests
-TEST(MatrixOperations, InverseMatrix2x2) {
-  S21Matrix m(2, 2);
-  m(0, 0) = 4.0;
-  m(0, 1) = 7.0;
-  m(1, 0) = 2.0;
-  m(1, 1) = 6.0;
-
-  S21Matrix result = m.InverseMatrix();
-
-  // det = 4*6 - 7*2 = 24 - 14 = 10
-  // inverse = (1/10) * [6, -7; -2, 4] = [0.6, -0.7; -0.2, 0.4]
-  EXPECT_NEAR(result(0, 0), 0.6, 1e-10);
-  EXPECT_NEAR(result(0, 1), -0.7, 1e-10);
-  EXPECT_NEAR(result(1, 0), -0.2, 1e-10);
-  EXPECT_NEAR(result(1, 1), 0.4, 1e-10);
-}
-
-TEST(MatrixOperations, InverseMatrixSingular) {
-  S21Matrix m(2, 2);
-  m(0, 0) = 1.0;
-  m(0, 1) = 2.0;
-  m(1, 0) = 2.0;
-  m(1, 1) = 4.0;  // det = 0
-
-  EXPECT_ANY_THROW(m.InverseMatrix());
-}
-
-TEST(MatrixOperations, InverseMatrixNonSquare) {
-  S21Matrix m(2, 3);
-
-  EXPECT_ANY_THROW(m.InverseMatrix());
-}
-
-// Complex operation chains
-TEST(MatrixOperations, OperationChaining) {
-  S21Matrix m1(2, 2);
-  S21Matrix m2(2, 2);
-  m1(0, 0) = 1.0;
-  m1(0, 1) = 2.0;
-  m1(1, 0) = 3.0;
-  m1(1, 1) = 4.0;
-  m2(0, 0) = 5.0;
-  m2(0, 1) = 6.0;
-  m2(1, 0) = 7.0;
-  m2(1, 1) = 8.0;
-
-  // (m1 + m2) * 2
-  m1.SumMatrix(m2);
-  m1.MulNumber(2.0);
-
-  EXPECT_DOUBLE_EQ(m1(0, 0), 12.0);  // (1+5)*2
-  EXPECT_DOUBLE_EQ(m1(0, 1), 16.0);  // (2+6)*2
-  EXPECT_DOUBLE_EQ(m1(1, 0), 20.0);  // (3+7)*2
-  EXPECT_DOUBLE_EQ(m1(1, 1), 24.0);  // (4+8)*2
-}
-
-// Edge cases
-TEST(MatrixOperations, EmptyMatrixOperations) {
-  S21Matrix empty1;
-  S21Matrix empty2;
-
-  // EqMatrix should work
-  EXPECT_TRUE(empty1.EqMatrix(empty2));
-
-  // Other operations should throw
-  EXPECT_ANY_THROW(empty1.SumMatrix(empty2));
-  EXPECT_ANY_THROW(empty1.SubMatrix(empty2));
-  EXPECT_ANY_THROW(empty1.MulMatrix(empty2));
-}
-
-TEST(MatrixOperations, LargeMatrixOperations) {
-  // Test with larger matrices
-  S21Matrix m1(10, 10);
-  S21Matrix m2(10, 10);
-
-  // Fill with values
-  for (int i = 0; i < 10; ++i) {
-    for (int j = 0; j < 10; ++j) {
-      m1(i, j) = i + j;
-      m2(i, j) = i - j;
-    }
-  }
-
-  // Test sum
-  m1.SumMatrix(m2);
-  for (int i = 0; i < 10; ++i) {
-    for (int j = 0; j < 10; ++j) {
-      EXPECT_DOUBLE_EQ(m1(i, j), (i + j) + (i - j));
-    }
-  }
+  EXPECT_TRUE(m.EqMatrix(doubleTransposed));
 }
