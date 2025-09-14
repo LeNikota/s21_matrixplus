@@ -28,11 +28,16 @@ bool S21Matrix::operator==(const S21Matrix& other) {
   return this->EqMatrix(other);
 }
 
-void S21Matrix::operator=(const S21Matrix& other) {
-  if (this == &other) return;
+S21Matrix& S21Matrix::operator=(const S21Matrix& other) {
+  if (this == &other) return *this;
 
-  ReallocateMatrix(other.rows_, other.cols_);
-  memcpy(matrix_, other.matrix_, rows_ * cols_ * sizeof(double));
+  S21Matrix temp(other);
+
+  std::swap(rows_, temp.rows_);
+  std::swap(cols_, temp.cols_);
+  std::swap(matrix_, temp.matrix_);
+
+  return *this;
 }
 
 S21Matrix& S21Matrix::operator+=(const S21Matrix& other) {
@@ -53,8 +58,8 @@ S21Matrix& S21Matrix::operator*=(const S21Matrix& other) {
 }
 
 double& S21Matrix::operator()(int row, int col) const {
-  if (row >= rows_ || col >= cols_)
-    throw "Incorrect input, index is out of range";
+  if (row >= rows_ || col >= cols_ || row < 0 || col < 0)
+    throw "Index is out of range";
 
   return matrix_[row][col];
 }

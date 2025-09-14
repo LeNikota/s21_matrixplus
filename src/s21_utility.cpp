@@ -12,7 +12,7 @@ void S21Matrix::AllocateMatrix() {
 void S21Matrix::ReallocateMatrix(int rows, int cols) {
   if (rows == rows_ && cols == cols_) return;
 
-  if (rows <= 0 || cols <= 0) {
+  if (rows < 0 || cols < 0) {
     throw "Rows and columns must be positive";
   }
 
