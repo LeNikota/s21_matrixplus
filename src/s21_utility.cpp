@@ -52,14 +52,21 @@ void S21Matrix::DeallocateMatrix() {
   cols_ = 0;
 }
 
-S21Matrix S21Matrix::GetMinor(int row, int col) {
+S21Matrix S21Matrix::GetMinor(int row, int col) const {
+  if (rows_ == 0 || cols_ == 0 || matrix_ == nullptr)
+    throw "Cannot get minor of empty matrix";
+  if (row < 0 || row >= rows_) throw "Row index is out of bounds";
+  if (col < 0 || col >= cols_) throw "Column index is out of bounds";
+  if (rows_ < 2 || cols_ < 2) throw "Matrix must be at least 2x2 to get minor";
+
   S21Matrix minor(rows_ - 1, cols_ - 1);
 
   for (int i = 0, mi = 0; i < rows_; i++) {
     if (i == row) continue;
     for (int j = 0, mj = 0; j < cols_; j++) {
       if (j == col) continue;
-      minor.matrix_[mi][mj] = matrix_[i][j];
+
+      minor(mi, mj) = matrix_[i][j];
       mj++;
     }
     mi++;

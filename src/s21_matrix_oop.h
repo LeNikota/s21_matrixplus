@@ -28,7 +28,7 @@ class S21Matrix {
   int GetCols() const;
   void SetCols(int cols);
 
-  bool EqMatrix(const S21Matrix& other);
+  bool EqMatrix(const S21Matrix& other) const;
   void SumMatrix(const S21Matrix& other);
   void SubMatrix(const S21Matrix& other);
   void MulNumber(const double num);
@@ -38,11 +38,11 @@ class S21Matrix {
   S21Matrix CalcComplements();
   S21Matrix InverseMatrix();
 
-  S21Matrix operator+(const S21Matrix& other);
-  S21Matrix operator-(const S21Matrix& other);
-  S21Matrix operator*(const double number);
-  S21Matrix operator*(const S21Matrix& other);
-  bool operator==(const S21Matrix& other);
+  S21Matrix operator+(const S21Matrix& other) const;
+  S21Matrix operator-(const S21Matrix& other) const;
+  S21Matrix operator*(const double number) const;
+  S21Matrix operator*(const S21Matrix& other) const;
+  bool operator==(const S21Matrix& other) const;
   S21Matrix& operator=(const S21Matrix& other);
   S21Matrix& operator+=(const S21Matrix& other);
   S21Matrix& operator-=(const S21Matrix& other);
@@ -50,7 +50,9 @@ class S21Matrix {
   S21Matrix& operator*=(const S21Matrix& other);
   double& operator()(int i, int j) const;
 
+  friend S21Matrix operator*(double num, const S21Matrix& matrix);
+
   // Utility
-  S21Matrix GetMinor(int row, int col);
+  S21Matrix GetMinor(int row, int col) const;
   void Print() const;
 };

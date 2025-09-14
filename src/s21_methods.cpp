@@ -6,7 +6,7 @@ void S21Matrix::SetRows(int rows) { ReallocateMatrix(rows, cols_); }
 int S21Matrix::GetCols() const { return cols_; }
 void S21Matrix::SetCols(int cols) { ReallocateMatrix(rows_, cols); }
 
-bool S21Matrix::EqMatrix(const S21Matrix &other) {
+bool S21Matrix::EqMatrix(const S21Matrix &other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) return false;
 
   for (int i = 0; i < rows_; i++) {

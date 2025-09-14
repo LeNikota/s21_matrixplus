@@ -1,30 +1,30 @@
 #include "s21_matrix_oop.h"
 
-S21Matrix S21Matrix::operator+(const S21Matrix& other) {
+S21Matrix S21Matrix::operator+(const S21Matrix& other) const {
   S21Matrix result(*this);
   result.SumMatrix(other);
   return result;
 }
 
-S21Matrix S21Matrix::operator-(const S21Matrix& other) {
+S21Matrix S21Matrix::operator-(const S21Matrix& other) const {
   S21Matrix result(*this);
   result.SubMatrix(other);
   return result;
 }
 
-S21Matrix S21Matrix::operator*(const double number) {
+S21Matrix S21Matrix::operator*(const double number) const {
   S21Matrix result(*this);
   result.MulNumber(number);
   return result;
 }
 
-S21Matrix S21Matrix::operator*(const S21Matrix& other) {
+S21Matrix S21Matrix::operator*(const S21Matrix& other) const {
   S21Matrix result(*this);
   result.MulMatrix(other);
   return result;
 }
 
-bool S21Matrix::operator==(const S21Matrix& other) {
+bool S21Matrix::operator==(const S21Matrix& other) const {
   return this->EqMatrix(other);
 }
 
@@ -44,14 +44,17 @@ S21Matrix& S21Matrix::operator+=(const S21Matrix& other) {
   this->SumMatrix(other);
   return *this;
 }
+
 S21Matrix& S21Matrix::operator-=(const S21Matrix& other) {
   this->SubMatrix(other);
   return *this;
 }
+
 S21Matrix& S21Matrix::operator*=(const double number) {
   this->MulNumber(number);
   return *this;
 }
+
 S21Matrix& S21Matrix::operator*=(const S21Matrix& other) {
   this->MulMatrix(other);
   return *this;
@@ -62,4 +65,8 @@ double& S21Matrix::operator()(int row, int col) const {
     throw "Index is out of range";
 
   return matrix_[row][col];
+}
+
+S21Matrix operator*(double num, const S21Matrix& matrix) {
+  return matrix * num;
 }
