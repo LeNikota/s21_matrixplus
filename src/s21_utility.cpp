@@ -12,22 +12,33 @@ void S21Matrix::AllocateMatrix() {
 void S21Matrix::ReallocateMatrix(int rows, int cols) {
   if (rows == rows_ && cols == cols_) return;
 
+  if (rows <= 0 || cols <= 0) {
+    throw "Rows and columns must be positive";
+  }
+
+  if (rows == 0 || cols == 0) {
+    DeallocateMatrix();
+
+    rows_ = rows;
+    cols_ = cols;
+
+    return;
+  }
+
   S21Matrix temp(rows, cols);
 
-  int rows_limit = rows > rows_ ? rows_ : rows;
-  int cols_limit = cols > cols_ ? cols_ : cols;
+  int rows_to_copy = std::min(rows, rows_);
+  int cols_to_copy = std::min(cols, cols_);
 
-  for (int i = 0; i < rows_limit; i++) {
-    for (int j = 0; j < cols_limit; j++) {
-      temp.matrix_[i][j] = matrix_[i][j];
+  for (int i = 0; i < rows_to_copy; i++) {
+    for (int j = 0; j < cols_to_copy; j++) {
+      temp(i, j) = matrix_[i][j];
     }
   }
 
-  DeallocateMatrix();
-  rows_ = rows;
-  cols_ = cols;
-  AllocateMatrix();
-  memcpy(matrix_, temp.matrix_, rows_ * cols_ * sizeof(double));
+  std::swap(rows_, temp.rows_);
+  std::swap(cols_, temp.cols_);
+  std::swap(matrix_, temp.matrix_);
 }
 
 void S21Matrix::DeallocateMatrix() {
